@@ -93,6 +93,10 @@ public:
   void setOscillatorFrequency(uint32_t freq);
   uint32_t getOscillatorFrequency(void);
 
+  void beginTransaction();
+  void autoIncrementPWMSet(uint16_t on, uint16_t off);
+  void endTransaction();
+
 private:
   uint8_t _i2caddr;
   TwoWire *_i2c;

@@ -238,6 +238,22 @@ void Adafruit_PWMServoDriver::setPWM(uint8_t num, uint16_t on, uint16_t off) {
   _i2c->endTransmission();
 }
 
+void Adafruit_PWMServoDriver::beginTransaction() {
+  _i2c->beginTransmission(_i2caddr);
+  _i2c->write(PCA9685_LED0_ON_L);
+}
+
+void Adafruit_PWMServoDriver::autoIncrementPWMSet(uint16_t on, uint16_t off) {
+  _i2c->write(static_cast<uint8_t>(on));
+  _i2c->write(static_cast<uint8_t>(on >> 8));
+  _i2c->write(static_cast<uint8_t>(off));
+  _i2c->write(static_cast<uint8_t>(off >> 8));
+}
+
+void Adafruit_PWMServoDriver::endTransaction() {
+  _i2c->endTransmission();
+}
+
 /*!
  *   @brief  Helper to set pin PWM output. Sets pin without having to deal with
  * on/off tick placement and properly handles a zero value as completely off and
