@@ -93,7 +93,7 @@ public:
   void setOscillatorFrequency(uint32_t freq);
   uint32_t getOscillatorFrequency(void);
 
-  void beginTransaction();
+  void beginTransaction(uint8_t num);
   void autoIncrementPWMSet(uint16_t on, uint16_t off);
   void endTransaction();
 

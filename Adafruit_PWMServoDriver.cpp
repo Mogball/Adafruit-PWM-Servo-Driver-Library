@@ -64,7 +64,7 @@ Adafruit_PWMServoDriver::Adafruit_PWMServoDriver(const uint8_t addr,
  *          Sets External Clock (Optional)
  */
 void Adafruit_PWMServoDriver::begin(uint8_t prescale) {
-  _i2c->begin();
+  //_i2c->begin();
   reset();
   if (prescale) {
     setExtClk(prescale);
@@ -238,9 +238,9 @@ void Adafruit_PWMServoDriver::setPWM(uint8_t num, uint16_t on, uint16_t off) {
   _i2c->endTransmission();
 }
 
-void Adafruit_PWMServoDriver::beginTransaction() {
+void Adafruit_PWMServoDriver::beginTransaction(uint8_t num) {
   _i2c->beginTransmission(_i2caddr);
-  _i2c->write(PCA9685_LED0_ON_L);
+  _i2c->write(PCA9685_LED0_ON_L + 4 * num);
 }
 
 void Adafruit_PWMServoDriver::autoIncrementPWMSet(uint16_t on, uint16_t off) {
